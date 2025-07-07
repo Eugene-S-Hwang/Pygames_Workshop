@@ -61,7 +61,7 @@ SKY_BLUE = (105, 186, 255)
 WHITE = (255, 255, 255)
 
 
-def draw_setting():
+async def draw_setting():
     """Draws background, platforms, floor, and banana"""
     # For each new frame, we want to redraw our background over the previous frame
     pygame.draw.rect(screen, SKY_BLUE, (0, 0, SCREEN_WIDTH, SCREEN_HEIGHT))
@@ -83,7 +83,7 @@ def draw_setting():
     screen.blit(score_txt, (10, 10))
 
 
-def update_monkey():
+async def update_monkey():
     """Control monkey's movement and image, and detect collisions with platforms and banana"""
     # Globals allow us to edit variable that exist outside of this function
     global monkey_x, monkey_y, velocity_y, monkey, monkey_img, platform_list, score
@@ -141,7 +141,7 @@ def update_monkey():
     screen.blit(monkey_img, (monkey_x, monkey_y))
 
 
-def game_over_display():
+async def game_over_display():
     """Displays game stats whenever time runs out"""
     global score
 
@@ -174,7 +174,7 @@ def game_over_display():
                     sys.exit()
 
 
-def advance_timer():
+async def advance_timer():
     """Every frame, reduce the time left for the game and display this change"""
     global top_score, frames_left
 
@@ -189,7 +189,7 @@ def advance_timer():
         game_over_display()
 
 
-def generate_platforms():
+async def generate_platforms():
     """Whenever there are fewer platforms than desired num_platforms, generate new random ones"""
     current_platform_count = len(platform_list)
     while current_platform_count < num_platforms:
@@ -203,7 +203,7 @@ def generate_platforms():
         current_platform_count += 1
 
 
-def reset_variables():
+async def reset_variables():
     """Every time the game_loop is rerun, reset relevant variables"""
     global frames_left, score, platform_list, monkey_x, monkey_y
 
@@ -240,7 +240,7 @@ async def game_loop():
         frame += 1  # We use this frame variable to animate our monkey
 
 
-game_loop()
+# game_loop()
 
 asyncio.run(game_loop())
 
