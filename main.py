@@ -159,19 +159,13 @@ def game_over_display():
     pygame.display.update()
 
     # Wait for restart or quit input
-    input_waiting = True
-    while input_waiting:
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                pygame.quit()
-                sys.exit()
-            if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_r:  # Press R to restart
-                    input_waiting = False
-                    game_loop()  # Restart the game
-                elif event.key == pygame.K_q:  # Press Q to quit
-                    pygame.quit()
-                    sys.exit()
+    # input_waiting = True
+    # while input_waiting:
+    #     for event in pygame.event.get():
+    #         if event.type == pygame.QUIT:
+    #             pygame.quit()
+    #             sys.exit()
+            
 
 
 def advance_timer():
@@ -217,7 +211,7 @@ def reset_variables():
 
 async def main():
     """This function runs our main game loop, yippie!"""
-    global frame
+    global frame, frames_left
 
     reset_variables()
     running = True
@@ -228,6 +222,14 @@ async def main():
                 running = False
                 pygame.quit()
                 sys.exit()
+            elif event.type == pygame.KEYDOWN and frames_left <= 0:
+                if event.key == pygame.K_r:  # Press R to restart
+                    input_waiting = False
+                    reset_variables()
+                    # main()  # Restart the game
+                elif event.key == pygame.K_q:  # Press Q to quit
+                    pygame.quit()
+                    sys.exit()
 
         draw_setting()  # Drawing floor, platforms, and banana
         update_monkey()  # Let's allow our monkey to move and collide with things
@@ -237,6 +239,7 @@ async def main():
         
         clock.tick(30)  # This functions helps us cap the FPS (Frames per Second)
         frame += 1  # We use this frame variable to animate our monkey
+        pygame.display.update()
         await asyncio.sleep(0)
 
 
@@ -261,3 +264,4 @@ asyncio.run(main())
 # 		# Rest of game loop goes here
 		
 # game_loop()
+

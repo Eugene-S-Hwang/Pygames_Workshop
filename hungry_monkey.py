@@ -158,19 +158,20 @@ def game_over_display():
     pygame.display.update()
 
     # Wait for restart or quit input
-    input_waiting = True
-    while input_waiting:
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                pygame.quit()
-                sys.exit()
-            if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_r:  # Press R to restart
-                    input_waiting = False
-                    game_loop()  # Restart the game
-                elif event.key == pygame.K_q:  # Press Q to quit
-                    pygame.quit()
-                    sys.exit()
+    # input_waiting = True
+    # while input_waiting:
+    #     for event in pygame.event.get():
+    #         if event.type == pygame.QUIT:
+    #             pygame.quit()
+    #             sys.exit()
+    #         if event.type == pygame.KEYDOWN:
+    #             if event.key == pygame.K_r:  # Press R to restart
+    #                 input_waiting = False
+    #                 return
+    #                 # game_loop()  # Restart the game
+    #             elif event.key == pygame.K_q:  # Press Q to quit
+    #                 pygame.quit()
+    #                 sys.exit()
 
 
 def advance_timer():
